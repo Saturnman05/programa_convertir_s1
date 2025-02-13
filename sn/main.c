@@ -12,9 +12,59 @@ char *base_8(char *);
 int base_10(char *);
 char *base_16(char *);
 
-int main()
+int main(int argc, char *argv[])
 {
-    menu();
+    if (argc == 1)
+    {
+        menu();
+        return 0;
+    }
+    else if (argc > 2)
+    {
+        printf("ERROR.\n");
+        printf("Uso 1: ./main\n");
+        printf("Uso 2: ./main <numero>\n");
+        return 1;
+    }
+
+    char *num = argv[1];
+    if (num[0] == '0' && num[1] == 'b')
+    {
+        char *octal = base_8(num);
+        printf("Octal: %s\n", octal);
+        int decimal = base_10(num);
+        printf("Decimal: %d\n", decimal);
+        char *hexadecimal = base_16(num);
+        printf("Hexadecimal: %s\n", hexadecimal);
+    }
+    else if (num[0] == '0' && num[1] == 'x')
+    {
+        char *binario = base_2(num);
+        printf("Binario: %s\n", binario);
+        char *octal = base_8(num);
+        printf("Octal: %s\n", octal);
+        int decimal = base_10(num);
+        printf("Decimal: %d\n", decimal);
+    }
+    else if (num[0] == '0')
+    {
+        char *binario = base_2(num);
+        printf("Binario: %s\n", binario);
+        int decimal = base_10(num);
+        printf("Decimal: %d\n", decimal);
+        char *hexadecimal = base_16(num);
+        printf("Hexadecimal: %s\n", hexadecimal);
+    }
+    else
+    {
+        char *binario = base_2(num);
+        printf("Binario: %s\n", binario);
+        char *octal = base_8(num);
+        printf("Octal: %s\n", octal);
+        char *hexadecimal = base_16(num);
+        printf("Hexadecimal: %s\n", hexadecimal);
+    }
+
     return 0;
 }
 
@@ -80,7 +130,7 @@ int base_10(char *num)
         while (num[i] != '\0')
         {
             decimal *= 16;
-            if (num[i] >= 0 && num[i] <= 9)
+            if (num[i] >= '0' && num[i] <= '9')
             {
                 decimal += num[i] - '0';
             }
