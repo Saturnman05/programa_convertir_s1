@@ -16,34 +16,41 @@ int main(int argc, char const *argv[])
     if (argc == 1)
     {
         menu();
+        return 0;
     }
-    else if (argc == 2)
+    else if (argc > 2)
     {
-        int is_number = 1;
-        for (int i = 0; argv[1][i] != '\0'; i++)
-        {
-            if (!isdigit(argv[1][i]))
-            {
-                is_number = 0;
-                break;
-            }
-        }
+        printf("ERROR.\n");
+        printf("Uso 1: ./main\n");
+        printf("Uso 2: ./main <numero o caracter ASCII>\n");
+        return 1;
+    }
 
-        if (is_number)
+    int is_number = 1;
+    for (int i = 0; argv[1][i] != '\0'; i++)
+    {
+        if (!isdigit(argv[1][i]))
         {
-            int num = atoi(argv[1]);
-            printf("El carácter equivalente a %d es: '%c'\n", num, num_ascii(num));
-        }
-        else if (argv[1][1] == '\0')
-        {
-            char character = argv[1][0];
-            printf("El valor ASCII de '%c' es: %d\n", character, ascii_num(character));
-        }
-        else
-        {
-            printf("Error: Ingresa un solo carácter o un número válido.\n");
+            is_number = 0;
+            break;
         }
     }
+
+    if (is_number)
+    {
+        int num = atoi(argv[1]);
+        printf("El carácter equivalente a %d es: '%c'\n", num, num_ascii(num));
+    }
+    else if (argv[1][1] == '\0')
+    {
+        char character = argv[1][0];
+        printf("El valor ASCII de '%c' es: %d\n", character, ascii_num(character));
+    }
+    else
+    {
+        printf("Error: Ingresa un solo carácter o un número válido.\n");
+    }
+
     return 0;
 }
 
