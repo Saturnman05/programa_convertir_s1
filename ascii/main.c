@@ -81,7 +81,7 @@ void menu()
             printf("Error. La opcion que escogiste no coincide con las opciones disponibles.\n\n");
             break;
         }
-    } while (select > 0 && select < 3);
+    } while (select > 0 && select < 4);
 }
 
 int ascii_num(char a)
